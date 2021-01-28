@@ -1,20 +1,59 @@
 {
   "name": "doctor-plus",
-  "version": "1.0.0",
+  "version": "0.0.3",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Demiez/doctor-plus.git"
+    "clean": "rimraf dist",
+    "start:build": "webpack -w",
+    "start:client": "webpack-dev-server",
+    "start:server": "nodemon dist/server.js",
+    "dev": "npm-run-all --parallel start:*",
+    "build": "./node_modules/.bin/webpack",
+    "tslint-check": "tslint-config-prettier-check ./tslint.json",
+    "lint-client": "tslint -c tslint.json 'client/**/*.{ts,tsx}' --fix --format verbose",
+    "lint-server": "tslint -c tslint.json 'server/**/*.{ts}' --fix --format verbose",
+    "pretest": "yarn build && yarn lint-server",
+    "test": "mocha --reporter spec --require ts-node/register server/test/**/*.spec.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Dmytro Petrenko",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Demiez/doctor-plus/issues"
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0"
   },
-  "homepage": "https://github.com/Demiez/doctor-plus#readme"
+  "devDependencies": {
+    "@types/chai": "^4.2.14",
+    "@types/chai-http": "^4.2.0",
+    "@types/express": "^4.17.11",
+    "@types/mocha": "^8.2.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-router-dom": "^5.1.7",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mocha": "^8.2.1",
+    "nodemon": "^2.0.7",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "source-map-loader": "^1.1.2",
+    "ts-loader": "^8.0.14",
+    "ts-node": "^9.1.1",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^5.0.0",
+    "typescript": "^4.1.3",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-middleware": "^3.4.0",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-hot-middleware": "^2.24.3",
+    "webpack-watch-server": "^1.2.1"
+  }
 }

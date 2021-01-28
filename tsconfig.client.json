@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "baseUrl": "client",
+    "outDir": "./build/",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "preserveConstEnums": true,
+    "jsx": "react",
+    "lib": ["dom", "dom.iterable", "esnext", "es5"]
+  },
+  "include": ["./client/**/**/*"],
+  "exclude": ["node_modules"]
+}
