@@ -31,7 +31,7 @@ const clientConfig = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'client', 'app', 'index.html'),
-      favicon: './client/assets/images/favicon.ico',
+      favicon: './client/assets/images/doctor_plus_icon.png',
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],
