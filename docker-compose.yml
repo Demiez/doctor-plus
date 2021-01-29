@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  doctor-plus-mongo:
+    image: mongo
+    restart: always
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - doctor-plus-mongo:/var/lib/doctor-plus-mongo/data
+
+volumes:
+  doctor-plus-mongo:
