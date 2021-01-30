@@ -1,5 +1,6 @@
 const path = require('path'),
   webpack = require('webpack'),
+  nodeExternals = require('webpack-node-externals'),
   HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const clientConfig = {
@@ -69,6 +70,7 @@ const serverConfig = {
       filename: '[name].js.map',
     }),
   ],
+  externals: [nodeExternals()],
 };
 
 module.exports = [clientConfig, serverConfig];
