@@ -13,3 +13,6 @@ typings
 npm-debug.log
 dist
 .vscode/chrome
+
+# Environment variables
+.env

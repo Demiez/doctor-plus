@@ -1,7 +1,8 @@
 const path = require('path'),
   webpack = require('webpack'),
   nodeExternals = require('webpack-node-externals'),
-  HtmlWebpackPlugin = require('html-webpack-plugin');
+  HtmlWebpackPlugin = require('html-webpack-plugin'),
+  Dotenv = require('dotenv-webpack');
 
 const clientConfig = {
   mode: process.env.NODE_ENV || 'development',
@@ -69,6 +70,7 @@ const serverConfig = {
     new webpack.SourceMapDevToolPlugin({
       filename: '[name].js.map',
     }),
+    new Dotenv(),
   ],
   externals: [nodeExternals()],
 };

@@ -7,7 +7,7 @@
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "lib": ["es2017", "dom"],
-    "types": ["node", "express"]
+    "types": ["node", "express"],
   },
   "include": ["./server/**/**/*"],
   "exclude": ["node_modules"]
