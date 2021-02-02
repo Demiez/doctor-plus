@@ -37,6 +37,7 @@ const clientConfig = {
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],
+  stats: 'errors-only',
 };
 
 const serverConfig = {
@@ -72,6 +73,7 @@ const serverConfig = {
     }),
     new Dotenv(),
   ],
+  stats: 'errors-only',
   externals: [nodeExternals()],
 };
 
