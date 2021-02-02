@@ -1,5 +1,9 @@
-import * as bodyParser from 'body-parser';
 import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import * as cookieParser from 'cookie-parser';
+import * as compress from 'compression';
+import * as cors from 'cors';
+import * as helmet from 'helmet';
 import * as path from 'path';
 import { Index } from './routes/index';
 
@@ -12,7 +16,13 @@ class App {
   constructor() {
     this.app = express();
     this.app.use(bodyParser.json());
+    this.app.use(cookieParser());
+    this.app.use(compress());
+    this.app.use(helmet());
+    this.app.use(cors());
+
     this.app.use('/', express.static(path.join(CURRENT_WORKING_DIR, 'dist')));
+
     this.indexRoutes.routes(this.app);
   }
 }
