@@ -46,9 +46,11 @@ const userSchema: Schema = new Schema({
 
 userSchema
   .virtual('password')
-  .set((password: string) => {
+  .set(function (password: string) {
     this._password = password;
   })
-  .get(() => this._password);
+  .get(function () {
+    return this._password;
+  });
 
 export const UserModel = model<IUserDocument, IUserModel>('User', userSchema, 'users');
