@@ -1,4 +1,5 @@
 import { Document, Model, model, Schema } from 'mongoose';
+import * as crypto from 'crypto';
 
 export interface IUserDocument extends Document {
   name: string;
@@ -7,6 +8,7 @@ export interface IUserDocument extends Document {
   updatedOn: Date;
   hashed_password: string;
   salt: string;
+  encryptPassword(plainText: string): string;
 }
 
 interface IUserModel extends Model<IUserDocument> {}
@@ -43,11 +45,33 @@ const userSchema: Schema = new Schema({
     type: String,
   },
 });
+userSchema.methods = {
+  authenticate(plainText: string): boolean {
+    const user = this as IUserDocument;
+    return user.encryptPassword(plainText) === user.hashed_password;
+  },
+  encryptPassword(password: string) {
+    const user = this as IUserDocument;
+    if (!password) {
+      return '';
+    }
+    try {
+      return crypto.createHmac('sha1', user.salt).update(password).digest('hex');
+    } catch (err) {
+      return '';
+    }
+  },
+  makeSalt() {
+    return Math.round(new Date().valueOf() * Math.random()) + '';
+  },
+};
 
 userSchema
   .virtual('password')
   .set(function (password: string) {
     this._password = password;
+    this.salt = this.makeSalt();
+    this.hashed_password = this.encryptPassword(password);
   })
   .get(function () {
     return this._password;
