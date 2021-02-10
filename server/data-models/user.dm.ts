@@ -13,7 +13,7 @@ export interface IUserDocument extends Document {
 
 interface IUserModel extends Model<IUserDocument> {}
 
-const userSchema: Schema = new Schema({
+const userSchema = new Schema<IUserDocument, IUserModel>({
   name: {
     type: String,
     trim: true,
@@ -48,16 +48,14 @@ const userSchema: Schema = new Schema({
 
 userSchema.methods = {
   authenticate(plainText: string): boolean {
-    const user = this as IUserDocument;
-    return user.encryptPassword(plainText) === user.hashed_password;
+    return this.encryptPassword(plainText) === this.hashed_password;
   },
   encryptPassword(password: string) {
-    const user = this as IUserDocument;
     if (!password) {
       return '';
     }
     try {
-      return crypto.createHmac('sha1', user.salt).update(password).digest('hex');
+      return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
     } catch (err) {
       return '';
     }
@@ -67,7 +65,7 @@ userSchema.methods = {
   },
 };
 
-userSchema.path('hashed_password').validate(function (value) {
+userSchema.path('hashed_password').validate(function (value: string) {
   if (this._password && this._password.length < 6) {
     this.invalidate('password', 'Password must be at least 6 characters');
   }
@@ -88,4 +86,4 @@ userSchema
     return this._password;
   });
 
-export const UserModel = model<IUserDocument, IUserModel>('User', userSchema, 'users');
+export const UserModel = model('User', userSchema, 'users');
