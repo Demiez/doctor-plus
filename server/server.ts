@@ -3,7 +3,7 @@ import app from './app';
 
 require('mongoose').Promise = global.Promise;
 
-const port: string | number = process.env.PORT || 4000;
+const port: string | number = process.env.PORT || 5000;
 const dbConnectionString = process.env.DB_HOST || process.env.DB_HOST_LOCAL;
 
 mongoose.connect(dbConnectionString, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
