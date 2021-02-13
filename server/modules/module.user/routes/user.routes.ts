@@ -1,9 +1,8 @@
 import { Application, Request, Response } from 'express';
+import { ModuleUser_UserController } from '../controllers/user.controller';
 
 export class UserRoute {
   public routes(app: Application): void {
-    app.route('/users').get((req: Request, res: Response) => {
-      res.status(200).send({ status: 'success' });
-    });
+    app.route('/users').get((req: Request, res: Response) => ModuleUser_UserController.getUsers(req, res));
   }
 }
