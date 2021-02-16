@@ -15,8 +15,6 @@ class UserController extends BaseController {
 
   public async createUser(req: Request, res: Response) {
     const user = new UserModel(req.body);
-    // throw new BadRequestError('dd', []);
-    // const error = new BadRequestError('error message', []);
     try {
       await user.save();
     } catch (err) {
