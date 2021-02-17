@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
 import BaseController from '../../../core/abstract/base-controller';
-import { BadRequestError, NotFoundError } from '../../../core/errors/error-response';
-import { getErrorMessage } from '../../../core/utils/db-error-handler';
-import { UserModel } from '../data-models/user.dm';
+import { ModuleUser_UserService } from '../services/user.service';
 
 class UserController extends BaseController {
   public async getUsers(req: Request, res: Response) {
@@ -14,14 +12,11 @@ class UserController extends BaseController {
   }
 
   public async createUser(req: Request, res: Response) {
-    const user = new UserModel(req.body);
-    try {
-      await user.save();
-    } catch (err) {
-      throw new BadRequestError(getErrorMessage(err), ['user']);
-    }
+    const userData = req.body;
 
-    return this.sendSuccessResponse(res, 'User Created');
+    const result = await ModuleUser_UserService.createUser(userData);
+
+    return this.sendSuccessResponse(res, result);
   }
 
   public async updateUser(req: Request, res: Response) {
