@@ -4,7 +4,13 @@ import { wrapRouteAction } from '../../../core/route/route-wrapper';
 
 export class UserRoute {
   public routes(app: Application): void {
-    app.route('/users').get((req: Request, res: Response) => ModuleUser_UserController.getUsers(req, res));
+    app
+      .route('/users')
+      .get(wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.getUsers(req, res)));
+
+    app
+      .route('/users/:userId')
+      .get(wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.getUserById(req, res)));
 
     app
       .route('/users')
