@@ -1,5 +1,6 @@
+import { validate } from 'uuid';
 import { IUserDocument, UserModel } from '../data-models/user.dm';
-import { BadRequestError } from '../../../core/errors/error-response';
+import { BadRequestError, BaseErrorSubCodes, ErrorCodes, ForbiddenError, NotFoundError } from '../../../core/errors';
 import { getErrorMessage } from '../../../core/utils/db-error-handler';
 
 interface IProjection {
@@ -20,6 +21,26 @@ class UserService {
     return users;
   }
 
+  public async getUserById(userId: string): Promise<IUserDocument> {
+    if (!userId) {
+      throw new ForbiddenError(BaseErrorSubCodes.INVALID_INPUT_PARAMS_IS_REQUIRED, ['provide userId']);
+    }
+
+    if (!validate(userId)) {
+      throw new BadRequestError(BaseErrorSubCodes.INVALID_INPUT_PARAMS_IS_BAD_VALUE, ['provide valid userId']);
+    }
+
+    return this.tryGetUserById(userId);
+  }
+
+  public async tryGetUserById(userId: string, projection: string | IProjection = {}): Promise<IUserDocument> {
+    const user = await UserModel.findOne({ _id: userId }, projection);
+
+    this.throwExceptionIfUserNotFound(user);
+
+    return user;
+  }
+
   public async createUser(userData: {}) {
     const user = new UserModel(userData);
 
@@ -30,6 +51,12 @@ class UserService {
     }
 
     return user;
+  }
+
+  private throwExceptionIfUserNotFound(user: IUserDocument) {
+    if (!user) {
+      throw new NotFoundError(ErrorCodes.RECORD_NOT_FOUND, ['user not found']);
+    }
   }
 }
 
