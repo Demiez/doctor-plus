@@ -10,10 +10,14 @@ export class UserRoute {
 
     app
       .route('/users/:userId')
-      .get(wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.getUserById(req, res)));
+      .get(wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.getUser(req, res)));
 
     app
       .route('/users')
       .post(wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.createUser(req, res)));
+
+    app
+      .route('/users/:userId')
+      .put(wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.updateUser(req, res)));
   }
 }

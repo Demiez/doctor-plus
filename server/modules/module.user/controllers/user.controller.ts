@@ -9,10 +9,10 @@ class UserController extends BaseController {
     return this.sendSuccessResponse(res, result);
   }
 
-  public async getUserById(req: Request, res: Response) {
+  public async getUser(req: Request, res: Response) {
     const { userId } = req.params;
 
-    const result = await ModuleUser_UserService.getUserById(userId);
+    const result = await ModuleUser_UserService.getUser(userId);
 
     return this.sendSuccessResponse(res, result);
   }
@@ -26,7 +26,11 @@ class UserController extends BaseController {
   }
 
   public async updateUser(req: Request, res: Response) {
-    return this.sendSuccessResponse(res, 'User Updated');
+    const userData = req.body;
+
+    const result = await ModuleUser_UserService.updateUser(userData);
+
+    return this.sendSuccessResponse(res, result);
   }
 
   public async deleteUser(req: Request, res: Response) {

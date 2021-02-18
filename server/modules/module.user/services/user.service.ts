@@ -1,7 +1,9 @@
+import { extend } from 'lodash';
 import { validate } from 'uuid';
 import { IUserDocument, UserModel } from '../data-models/user.dm';
 import { BadRequestError, BaseErrorSubCodes, ErrorCodes, ForbiddenError, NotFoundError } from '../../../core/errors';
 import { getErrorMessage } from '../../../core/utils/db-error-handler';
+import { UserViewModel, UserRequestViewModel } from '../view-models';
 
 interface IProjection {
   [key: string]: boolean;
@@ -21,16 +23,12 @@ class UserService {
     return users;
   }
 
-  public async getUserById(userId: string): Promise<IUserDocument> {
-    if (!userId) {
-      throw new ForbiddenError(BaseErrorSubCodes.INVALID_INPUT_PARAMS_IS_REQUIRED, ['provide userId']);
-    }
+  public async getUser(userId: string): Promise<UserViewModel> {
+    this.validateUserId(userId);
 
-    if (!validate(userId)) {
-      throw new BadRequestError(BaseErrorSubCodes.INVALID_INPUT_PARAMS_IS_BAD_VALUE, ['provide valid userId']);
-    }
+    const user = await this.tryGetUserById(userId);
 
-    return this.tryGetUserById(userId);
+    return new UserViewModel(user);
   }
 
   public async tryGetUserById(userId: string, projection: string | IProjection = {}): Promise<IUserDocument> {
@@ -53,9 +51,31 @@ class UserService {
     return user;
   }
 
+  public async updateUser(userData: UserRequestViewModel): Promise<UserViewModel> {
+    let user = await this.tryGetUserById(userData.id);
+
+    user = extend(user, userData);
+    user.updatedOn = new Date(Date.now());
+
+    await user.save();
+
+    return new UserViewModel(user);
+  }
+
   private throwExceptionIfUserNotFound(user: IUserDocument) {
     if (!user) {
       throw new NotFoundError(ErrorCodes.RECORD_NOT_FOUND, ['user not found']);
+    }
+  }
+
+  private validateUserId(userId: string) {
+    // find out if first check needed
+    if (!userId) {
+      throw new ForbiddenError(BaseErrorSubCodes.INVALID_INPUT_PARAMS_IS_REQUIRED, ['provide userId']);
+    }
+
+    if (!validate(userId)) {
+      throw new BadRequestError(BaseErrorSubCodes.INVALID_INPUT_PARAMS_IS_BAD_VALUE, ['provide valid userId']);
     }
   }
 }
