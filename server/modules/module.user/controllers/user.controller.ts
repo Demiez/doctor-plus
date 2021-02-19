@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import BaseController from '../../../core/abstract/base-controller';
 import { ModuleUser_UserService } from '../services/user.service';
+import { UserRequestViewModel } from '../view-models';
 
 class UserController extends BaseController {
   public async getUsers(req: Request, res: Response) {
@@ -18,23 +19,27 @@ class UserController extends BaseController {
   }
 
   public async createUser(req: Request, res: Response) {
-    const userData = req.body;
+    const userData = req.body as UserRequestViewModel;
 
-    const result = await ModuleUser_UserService.createUser(userData);
+    const createdUser = await ModuleUser_UserService.createUser(userData);
 
-    return this.sendSuccessResponse(res, result);
+    return this.sendSuccessResponse(res, createdUser);
   }
 
   public async updateUser(req: Request, res: Response) {
-    const userData = req.body;
+    const userData = req.body as UserRequestViewModel;
 
-    const result = await ModuleUser_UserService.updateUser(userData);
+    const updatedUser = await ModuleUser_UserService.updateUser(userData);
 
-    return this.sendSuccessResponse(res, result);
+    return this.sendSuccessResponse(res, updatedUser);
   }
 
   public async deleteUser(req: Request, res: Response) {
-    return this.sendSuccessResponse(res, 'User Deleted');
+    const { userId } = req.params;
+
+    const deletedUser = await ModuleUser_UserService.deleteUser(userId);
+
+    return this.sendSuccessResponse(res, deletedUser);
   }
 }
 

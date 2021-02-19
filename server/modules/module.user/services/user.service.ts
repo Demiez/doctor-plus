@@ -39,7 +39,7 @@ class UserService {
     return user;
   }
 
-  public async createUser(userData: {}) {
+  public async createUser(userData: UserRequestViewModel) {
     const user = new UserModel(userData);
 
     try {
@@ -58,6 +58,16 @@ class UserService {
     user.updatedOn = new Date(Date.now());
 
     await user.save();
+
+    return new UserViewModel(user);
+  }
+
+  public async deleteUser(userId: string): Promise<UserViewModel> {
+    this.validateUserId(userId);
+
+    const user = await this.tryGetUserById(userId);
+
+    await user.remove();
 
     return new UserViewModel(user);
   }

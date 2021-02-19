@@ -19,5 +19,9 @@ export class UserRoute {
     app
       .route('/users/:userId')
       .put(wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.updateUser(req, res)));
+
+    app
+      .route('/users/:userId')
+      .delete(wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.deleteUser(req, res)));
   }
 }
