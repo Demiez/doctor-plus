@@ -9,6 +9,7 @@
     "start:client": "webpack-dev-server",
     "start:server": "nodemon dist/server.js",
     "dev": "npm-run-all --parallel start:*",
+    "dev:be": "npm-run-all --parallel start:build start:server",
     "build": "./node_modules/.bin/webpack",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "lint-client": "tslint -c tslint.json 'client/**/*.{ts,tsx}' --fix --format verbose",
