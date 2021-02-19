@@ -39,6 +39,10 @@ class UserService {
     return user;
   }
 
+  public async getUserByEmail(email: string): Promise<IUserDocument> {
+    return await UserModel.findOne({ email });
+  }
+
   public async createUser(userData: UserRequestViewModel) {
     const user = new UserModel(userData);
 
