@@ -1,50 +1,77 @@
+import { v4 } from 'uuid';
+const mongoose = require('mongoose');
+require('mongoose-uuid2')(mongoose);
+const UUID = require('mongoose').Types.UUID;
+
 import { Document, Model, model, Schema } from 'mongoose';
 import * as crypto from 'crypto';
 
 export interface IUserDocument extends Document {
+  id: string;
   name: string;
   email: string;
   createdOn: Date;
   updatedOn: Date;
   hashed_password: string;
   salt: string;
+
   encryptPassword(plainText: string): string;
 }
 
 interface IUserModel extends Model<IUserDocument> {}
 
-const userSchema = new Schema<IUserDocument, IUserModel>({
-  name: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  email: {
-    type: String,
-    trim: true,
-    required: true,
-    unique: true,
-    validate: (value: string) => {
-      if (!value.match(/.+\@.+\..+/)) {
-        throw new Error('Please fill a valid email address');
-      }
+const userSchema = new Schema<IUserDocument, IUserModel>(
+  {
+    _id: {
+      type: UUID,
+      default: v4,
+    },
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    email: {
+      type: String,
+      trim: true,
+      required: true,
+      unique: true,
+      validate: (value: string) => {
+        if (!value.match(/.+\@.+\..+/)) {
+          throw new Error('Please fill a valid email address');
+        }
+      },
+    },
+    createdOn: {
+      type: Date,
+      default: Date.now,
+    },
+    updatedOn: {
+      type: Date,
+    },
+    hashed_password: {
+      type: String,
+      required: true,
+    },
+    salt: {
+      type: String,
     },
   },
-  createdOn: {
-    type: Date,
-    default: Date.now,
+  {
+    toObject: {
+      virtuals: true,
+      getters: true,
+    },
+    toJSON: {
+      virtuals: true,
+      getters: true,
+      transform: (doc: any, ret: any, options: any) => {
+        delete ret._id;
+        return ret;
+      },
+    },
   },
-  updatedOn: {
-    type: Date,
-  },
-  hashed_password: {
-    type: String,
-    required: true,
-  },
-  salt: {
-    type: String,
-  },
-});
+);
 
 userSchema.methods = {
   authenticate(plainText: string): boolean {
