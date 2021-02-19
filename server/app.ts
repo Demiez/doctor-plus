@@ -11,6 +11,7 @@ import { ErrorResponseTypes } from './core/enums/error-response-types.enum';
 import { BaseErrorCodes } from './core/errors/base-error-codes';
 import { Index } from './core/route/index';
 import { UserRoute } from './modules/module.user';
+import { AuthRoute } from './modules/module.auth';
 
 const CURRENT_WORKING_DIR = process.cwd();
 
@@ -18,6 +19,7 @@ class App {
   public app: express.Application;
   public indexRoutes: Index = new Index();
   public userRoutes: UserRoute = new UserRoute();
+  public authRoutes: AuthRoute = new AuthRoute();
 
   constructor() {
     this.app = express();
@@ -31,6 +33,7 @@ class App {
 
     this.indexRoutes.routes(this.app);
     this.userRoutes.routes(this.app);
+    this.authRoutes.routes(this.app);
 
     this.app.use((error: ErrorResponse, req: Request, res: Response, next: NextFunction) => {
       if (error.type === ErrorResponseTypes.BAD_REQUEST) {
