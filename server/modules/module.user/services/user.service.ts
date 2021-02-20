@@ -31,16 +31,24 @@ class UserService {
     return new UserViewModel(user);
   }
 
+  public async getUserByQuery(query: {}, projection?: string | IProjection) {
+    return await UserModel.find(query, projection);
+  }
+
   public async tryGetUserById(userId: string, projection: string | IProjection = {}): Promise<IUserDocument> {
-    const user = await UserModel.findOne({ _id: userId }, projection);
+    const user: IUserDocument = await UserModel.findOne({ _id: userId }, projection);
 
     this.throwExceptionIfUserNotFound(user);
 
     return user;
   }
 
-  public async getUserByEmail(email: string): Promise<IUserDocument> {
-    return await UserModel.findOne({ email });
+  public async tryGetUserByEmail(email: string): Promise<IUserDocument> {
+    const user: IUserDocument = await UserModel.findOne({ email });
+
+    this.throwExceptionIfUserNotFound(user);
+
+    return user;
   }
 
   public async createUser(userData: UserRequestViewModel) {

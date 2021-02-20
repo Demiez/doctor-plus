@@ -12,6 +12,7 @@ export interface IUserDocument extends Document {
   salt: string;
 
   encryptPassword(plainText: string): string;
+  authenticate(plainText: string): boolean;
 }
 
 interface IUserModel extends Model<IUserDocument> {}
