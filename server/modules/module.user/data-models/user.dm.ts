@@ -1,8 +1,4 @@
 import { v4 } from 'uuid';
-const mongoose = require('mongoose');
-require('mongoose-uuid2')(mongoose);
-const UUID = require('mongoose').Types.UUID;
-
 import { Document, Model, model, Schema } from 'mongoose';
 import * as crypto from 'crypto';
 
@@ -23,8 +19,8 @@ interface IUserModel extends Model<IUserDocument> {}
 const userSchema = new Schema<IUserDocument, IUserModel>(
   {
     _id: {
-      type: UUID,
-      default: v4,
+      type: String,
+      default: v4(),
     },
     name: {
       type: String,
