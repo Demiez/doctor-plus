@@ -1,7 +1,7 @@
 import { CookieOptions, Request, Response } from 'express';
 import * as moment from 'moment';
 import BaseController from '../../../core/abstract/base-controller';
-import { BaseResponseViewModel } from '../../../core/route/responses/base-response.model';
+import { StandardResponseViewModel } from '../../../core/view-models';
 import { ModuleAuth_AuthService } from '../services/auth.service';
 import { SignInRequestViewModel } from '../view-models';
 
@@ -21,7 +21,7 @@ class AuthController extends BaseController {
   public async signOut(req: Request, res: Response) {
     res.clearCookie('t');
 
-    return this.sendSuccessResponse(res, new BaseResponseViewModel('signed out', undefined));
+    return this.sendSuccessResponse(res, new StandardResponseViewModel('signed out', undefined));
   }
 }
 

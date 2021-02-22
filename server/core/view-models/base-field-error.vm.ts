@@ -1,4 +1,4 @@
-export abstract class BaseFieldErrorModel {
+export abstract class BaseFieldErrorViewModel {
   public abstract field: string;
   public abstract errorCode: string;
 }

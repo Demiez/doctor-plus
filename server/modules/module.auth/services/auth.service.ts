@@ -1,12 +1,7 @@
 import * as jwt from 'jsonwebtoken';
 
-import {
-  ErrorCodes,
-  ForbiddenError,
-  FieldIsRequiredModel,
-  NotFoundError,
-  UnauthorizedError,
-} from '../../../core/errors';
+import { ErrorCodes, ForbiddenError, NotFoundError, UnauthorizedError } from '../../../core/errors';
+import { FieldIsRequiredViewModel } from '../../../core/view-models';
 import { IUserDocument, UserModel, ModuleUser_UserService } from '../../module.user';
 import { SignInRequestViewModel, SignInResponseViewModel } from '../view-models';
 
@@ -15,11 +10,11 @@ class AuthService {
     const { email, password } = signinData;
 
     if (!email) {
-      throw new ForbiddenError(ErrorCodes.INVALID_INPUT_PARAMS, [new FieldIsRequiredModel('email')]);
+      throw new ForbiddenError(ErrorCodes.INVALID_INPUT_PARAMS, [new FieldIsRequiredViewModel('email')]);
     }
 
     if (!password) {
-      throw new ForbiddenError(ErrorCodes.INVALID_INPUT_PARAMS, [new FieldIsRequiredModel('password')]);
+      throw new ForbiddenError(ErrorCodes.INVALID_INPUT_PARAMS, [new FieldIsRequiredViewModel('password')]);
     }
 
     const user = await ModuleUser_UserService.tryGetUserByEmail(email);

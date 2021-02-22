@@ -1,6 +1,6 @@
-import { BaseFieldResponseModel } from './base-field.model';
+import { BaseFieldResponseViewModel } from './base-field-response.vm';
 
-export class BaseResponseViewModel extends BaseFieldResponseModel {
+export class StandardResponseViewModel extends BaseFieldResponseViewModel {
   public message: string;
   public status: string;
 
