@@ -1,8 +1,10 @@
+import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
+import * as expressJwt from 'express-jwt';
 
-import { ErrorCodes, ForbiddenError, NotFoundError, UnauthorizedError } from '../../../core/errors';
+import { ErrorCodes, ForbiddenError, UnauthorizedError } from '../../../core/errors';
 import { FieldIsRequiredViewModel } from '../../../core/view-models';
-import { IUserDocument, UserModel, ModuleUser_UserService } from '../../module.user';
+import { ModuleUser_UserService } from '../../module.user';
 import { SignInRequestViewModel, SignInResponseViewModel } from '../view-models';
 
 class AuthService {
@@ -26,6 +28,14 @@ class AuthService {
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 
     return new SignInResponseViewModel(token, user);
+  }
+
+  public checkSignIn() {
+    return expressJwt({
+      algorithms: ['HS256'],
+      secret: process.env.JWT_SECRET,
+      userProperty: 'auth',
+    });
   }
 }
 
