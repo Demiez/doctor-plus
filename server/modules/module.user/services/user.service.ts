@@ -3,7 +3,7 @@ import { validate } from 'uuid';
 import { IUserDocument, UserModel } from '../data-models/user.dm';
 import { BadRequestError, BaseErrorSubCodes, ErrorCodes, ForbiddenError, NotFoundError } from '../../../core/errors';
 import { getErrorMessage } from '../../../core/utils/db-error-handler';
-import { UserViewModel, UserRequestViewModel } from '../view-models';
+import { UserCreateRequestViewModel, UserViewModel, UserRequestViewModel } from '../view-models';
 
 interface IProjection {
   [key: string]: boolean;
@@ -14,6 +14,7 @@ class UserService {
     const defaultProjection: IProjection = {
       __v: false,
       hashed_password: false,
+      salt: false,
     };
 
     const userProjection = projection || defaultProjection;
@@ -51,16 +52,12 @@ class UserService {
     return user;
   }
 
-  public async createUser(userData: UserRequestViewModel) {
+  public async createUser(userData: UserCreateRequestViewModel) {
     const user = new UserModel(userData);
 
-    try {
-      await user.save();
-    } catch (err) {
-      throw new BadRequestError(getErrorMessage(err), ['user not created']);
-    }
+    await user.save();
 
-    return user;
+    return new UserViewModel(user);
   }
 
   public async updateUser(userData: UserRequestViewModel): Promise<UserViewModel> {

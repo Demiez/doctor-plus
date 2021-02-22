@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import BaseController from '../../../core/abstract/base-controller';
 import { ModuleUser_UserService } from '../services/user.service';
-import { UserRequestViewModel } from '../view-models';
+import { UserCreateRequestViewModel, UserRequestViewModel } from '../view-models';
 
 class UserController extends BaseController {
   public async getUsers(req: Request, res: Response) {
@@ -19,7 +19,7 @@ class UserController extends BaseController {
   }
 
   public async createUser(req: Request, res: Response) {
-    const userData = req.body as UserRequestViewModel;
+    const userData = req.body as UserCreateRequestViewModel;
 
     const createdUser = await ModuleUser_UserService.createUser(userData);
 

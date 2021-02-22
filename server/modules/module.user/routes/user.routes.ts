@@ -1,6 +1,7 @@
 import { Application, Request, Response } from 'express';
 import { ModuleUser_UserController } from '../controllers/user.controller';
 import { wrapRouteAction } from '../../../core/route/route-wrapper';
+import { ModuleAuth_AuthService } from '../../module.auth';
 
 export class UserRoute {
   public routes(app: Application): void {
