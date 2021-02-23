@@ -1,7 +1,7 @@
 import { Application, Request, Response } from 'express';
 import { ModuleUser_UserController } from '../controllers/user.controller';
 import { wrapRouteAction } from '../../../core/route/route-wrapper';
-import { ModuleAuth_AuthService } from '../../module.auth';
+import { ModuleAuth_AuthController } from '../../module.auth';
 
 export class UserRoute {
   public routes(app: Application): void {
@@ -9,9 +9,10 @@ export class UserRoute {
       .route('/users')
       .get(wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.getUsers(req, res)));
 
-    app
-      .route('/users/:userId')
-      .get(wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.getUser(req, res)));
+    app.route('/users/:userId').get(
+      ModuleAuth_AuthController.authenticateJWT,
+      wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.getUser(req, res)),
+    );
 
     app
       .route('/users')

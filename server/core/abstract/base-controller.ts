@@ -20,7 +20,7 @@ export default class BaseController {
     return res.status(401).json(error);
   }
   /**
-   * Used for send validation and handled errors to the client
+   * Used for sending validation and handling errors to the client
    * @param res
    * @param error
    */

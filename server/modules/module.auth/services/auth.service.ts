@@ -1,6 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
-import * as expressJwt from 'express-jwt';
 
 import { ErrorCodes, ForbiddenError, UnauthorizedError } from '../../../core/errors';
 import { FieldIsRequiredViewModel } from '../../../core/view-models';
@@ -28,14 +26,6 @@ class AuthService {
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 
     return new SignInResponseViewModel(token, user);
-  }
-
-  public checkSignIn() {
-    return expressJwt({
-      algorithms: ['HS256'],
-      secret: process.env.JWT_SECRET,
-      userProperty: 'auth',
-    });
   }
 }
 

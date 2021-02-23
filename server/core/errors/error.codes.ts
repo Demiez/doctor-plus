@@ -9,6 +9,10 @@ export class ErrorCodes extends BaseErrorCodes {
     return 'INVALID_INPUT_PARAMS';
   }
 
+  public static get INVALID_AUTH_PARAMS() {
+    return 'INVALID_AUTH_PARAMS';
+  }
+
   public static get INVALID_AUTH_PARAMS_PASSWORD_INCORECT() {
     return 'INVALID_AUTH_PARAMS_PASSWORD_INCORECT';
   }
