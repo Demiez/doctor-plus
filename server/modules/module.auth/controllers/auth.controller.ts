@@ -47,7 +47,8 @@ class AuthController extends BaseController {
   }
 
   public authorizeUser(req: Request, res: Response, next: NextFunction) {
-    const isAuthorized = (req.user as AuthTokenModel).id === req.params.userId;
+    const userId = req.params.userId || req.body.id;
+    const isAuthorized = (req.user as AuthTokenModel).id === userId;
 
     if (!isAuthorized) {
       throw new UnauthorizedError(ErrorCodes.UNAUTHORIZED, ['User is not authorized for this action']);

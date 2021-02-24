@@ -19,7 +19,7 @@ export class UserRoute {
       wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.getUser(req, res)),
     );
 
-    app.route('/users/:userId').put(
+    app.route('/users').put(
       ModuleAuth_AuthController.authenticateJWT,
       ModuleAuth_AuthController.authorizeUser,
       wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.updateUser(req, res)),
