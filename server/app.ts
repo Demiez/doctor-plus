@@ -15,6 +15,14 @@ import { AuthRoute } from './modules/module.auth';
 
 const CURRENT_WORKING_DIR = process.cwd();
 
+declare global {
+  namespace Express {
+    interface Request {
+      user?: {};
+    }
+  }
+}
+
 class App {
   public app: express.Application;
   public indexRoutes: Index = new Index();
