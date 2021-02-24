@@ -6,6 +6,7 @@ import BaseController from '../../../core/abstract/base-controller';
 import { StandardResponseViewModel } from '../../../core/view-models';
 import { ModuleAuth_AuthService } from '../services/auth.service';
 import { SignInRequestViewModel } from '../view-models';
+import { AuthTokenModel } from '../data-models/auth-token.dm';
 
 class AuthController extends BaseController {
   public async signIn(req: Request, res: Response) {
@@ -43,6 +44,16 @@ class AuthController extends BaseController {
     } else {
       throw new UnauthorizedError(ErrorCodes.UNAUTHORIZED);
     }
+  }
+
+  public authorizeUser(req: Request, res: Response, next: NextFunction) {
+    const isAuthorized = (req.user as AuthTokenModel).id === req.params.userId;
+
+    if (!isAuthorized) {
+      throw new UnauthorizedError(ErrorCodes.UNAUTHORIZED, ['User is not authorized for this action']);
+    }
+
+    next();
   }
 }
 

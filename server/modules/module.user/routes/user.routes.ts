@@ -9,21 +9,26 @@ export class UserRoute {
       .route('/users')
       .get(wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.getUsers(req, res)));
 
-    app.route('/users/:userId').get(
-      ModuleAuth_AuthController.authenticateJWT,
-      wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.getUser(req, res)),
-    );
-
     app
       .route('/users')
       .post(wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.createUser(req, res)));
 
-    app
-      .route('/users/:userId')
-      .put(wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.updateUser(req, res)));
+    app.route('/users/:userId').get(
+      ModuleAuth_AuthController.authenticateJWT,
+      ModuleAuth_AuthController.authorizeUser,
+      wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.getUser(req, res)),
+    );
 
-    app
-      .route('/users/:userId')
-      .delete(wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.deleteUser(req, res)));
+    app.route('/users/:userId').put(
+      ModuleAuth_AuthController.authenticateJWT,
+      ModuleAuth_AuthController.authorizeUser,
+      wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.updateUser(req, res)),
+    );
+
+    app.route('/users/:userId').delete(
+      ModuleAuth_AuthController.authenticateJWT,
+      ModuleAuth_AuthController.authorizeUser,
+      wrapRouteAction((req: Request, res: Response) => ModuleUser_UserController.deleteUser(req, res)),
+    );
   }
 }
