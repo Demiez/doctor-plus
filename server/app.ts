@@ -34,7 +34,11 @@ class App {
     this.app.use(bodyParser.json());
     this.app.use(cookieParser());
     this.app.use(compress());
-    this.app.use(helmet());
+    this.app.use(
+      helmet({
+        contentSecurityPolicy: false,
+      }),
+    );
     this.app.use(cors());
 
     this.app.use('/', express.static(path.join(CURRENT_WORKING_DIR, 'dist')));
