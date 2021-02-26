@@ -14,6 +14,10 @@ const clientConfig = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].bundle.js',
   },
+  devServer: {
+    contentBase: '/dist',
+    hot: true,
+  },
   devtool: 'eval-source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
