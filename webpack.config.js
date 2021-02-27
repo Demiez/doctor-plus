@@ -31,6 +31,13 @@ const clientConfig = {
           configFile: 'tsconfig.client.json',
         },
       },
+      {
+        test: /\.(jpg|png|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[hash].[ext]',
+        },
+      },
       { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
     ],
   },
