@@ -3,8 +3,9 @@ import { Route, Redirect } from 'react-router-dom';
 import { ModuleAuth_AuthHelper } from './auth-helper.util';
 
 interface IPrivateRouteProps {
-  component: any;
-  rest: any;
+  component: React.FC;
+  path?: string;
+  exact?: boolean;
 }
 
 export const PrivateRoute = ({ component: ReactComponent, ...rest }: IPrivateRouteProps) => {
