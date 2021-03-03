@@ -53,16 +53,16 @@ export const UsersPage: React.FC = () => {
         All Doctors
       </Typography>
       <List dense={true}>
-        {users.map((item, i) => {
+        {users.map((user, i) => {
           return (
-            <Link to={'/user/' + item.id} key={i}>
+            <Link to={'/user/' + user.id} key={i}>
               <ListItem button={true}>
                 <ListItemAvatar>
                   <Avatar>
                     <Person />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={item.name} />
+                <ListItemText primary={user.name} />
                 <ListItemSecondaryAction>
                   <IconButton>
                     <ArrowForward />
