@@ -4,7 +4,7 @@ export default class BaseController {
    * @param uri
    * @param signal
    */
-  public async sendGetRequest(uri: string, signal: AbortSignal): Promise<Response> {
+  public async sendGetRequest<T>(uri: string, signal: AbortSignal): Promise<T> {
     try {
       const response = await fetch(uri, {
         method: 'GET',
@@ -23,7 +23,7 @@ export default class BaseController {
    * @param credentials
    * @param signal
    */
-  public async sendGetRequestWithAuth(uri: string, credentials: any = {}, signal: AbortSignal): Promise<Response> {
+  public async sendGetRequestWithAuth(uri: string, credentials: any = {}, signal: AbortSignal) {
     try {
       const response = await fetch(uri, {
         method: 'GET',
@@ -47,7 +47,7 @@ export default class BaseController {
    * @param uri
    * @param body
    */
-  public async sendPostRequest(uri: string, body: any = {}, credentials?: boolean): Promise<Response> {
+  public async sendPostRequest(uri: string, body: any = {}, credentials?: boolean) {
     try {
       const response = await fetch(uri, {
         method: 'POST',
@@ -73,12 +73,7 @@ export default class BaseController {
    * @param credentials
    * @param signal
    */
-  public async sendPuTRequestWithAuth(
-    uri: string,
-    body: any = {},
-    credentials: any = {},
-    signal: AbortSignal,
-  ): Promise<Response> {
+  public async sendPutRequestWithAuth(uri: string, body: any = {}, credentials: any = {}, signal: AbortSignal) {
     try {
       const response = await fetch(uri, {
         method: 'PUT',
@@ -105,7 +100,7 @@ export default class BaseController {
    * @param credentials
    * @param signal
    */
-  public async sendDeleteRequestWithAuth(uri: string, credentials: any = {}): Promise<Response> {
+  public async sendDeleteRequestWithAuth(uri: string, credentials: any = {}) {
     try {
       const response = await fetch(uri, {
         method: 'DELETE',
