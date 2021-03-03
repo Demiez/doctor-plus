@@ -17,6 +17,13 @@ const clientConfig = {
   devServer: {
     contentBase: '/dist',
     hot: true,
+    historyApiFallback: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        pathRewrite: { '^/api': '' },
+      },
+    },
   },
   devtool: 'eval-source-map',
   resolve: {
