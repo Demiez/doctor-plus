@@ -47,7 +47,7 @@ export default class BaseController {
    * @param uri
    * @param body
    */
-  public async sendPostRequest(uri: string, body: any = {}, credentials?: boolean) {
+  public async sendPostRequest<T>(uri: string, body: any = {}, credentials?: boolean): Promise<T> {
     try {
       const response = await fetch(uri, {
         method: 'POST',
@@ -62,7 +62,7 @@ export default class BaseController {
 
       return await response.json();
     } catch (err) {
-      console.log(err);
+      throw new Error();
     }
   }
 

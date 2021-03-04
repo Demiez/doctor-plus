@@ -1,14 +1,14 @@
 import BaseController from '../../../core/abstract/base-controller';
-import { GET_USERS_URI } from '../constants/uri.constants';
-import { UserViewModel } from '../view-models';
+import { BASIC_USERS_URI } from '../constants/uri.constants';
+import { UserViewModel, UserCreateRequestViewModel } from '../view-models';
 
 class UserController extends BaseController {
-  public async createUser(): Promise<{}> {
-    return null;
+  public async createUser(user: UserCreateRequestViewModel) {
+    return await this.sendPostRequest<UserCreateRequestViewModel>(BASIC_USERS_URI, user);
   }
 
   public async getUsers(signal: AbortSignal) {
-    return await this.sendGetRequest<UserViewModel[]>(GET_USERS_URI, signal);
+    return await this.sendGetRequest<UserViewModel[]>(BASIC_USERS_URI, signal);
   }
 }
 
