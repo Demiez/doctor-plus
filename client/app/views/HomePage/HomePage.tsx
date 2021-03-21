@@ -2,6 +2,7 @@ import * as React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import backgroundImg from '../../../assets/images/home_page_bg.jpg';
+import '../../../assets/styles/core/style.scss';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -21,16 +22,19 @@ const useStyles = makeStyles((theme) => ({
 export const HomePage: React.FC = () => {
   const classes = useStyles();
   return (
-    <Card className={classes.card}>
-      <Typography variant="h6" className={classes.title}>
-        Home Page
-      </Typography>
-      <CardMedia className={classes.media} image={backgroundImg} title="Doctor Plus Title" />
-      <CardContent>
-        <Typography variant="body2" component="p">
-          Welcome to Doctor Plus home page
+    <div>
+      <div className="style">ddd</div>
+      {/* <Card className={classes.card}>
+        <Typography variant="h6" className={classes.title}>
+          Home Page
         </Typography>
-      </CardContent>
-    </Card>
+        <CardMedia className={classes.media} image={backgroundImg} title="Doctor Plus Title" />
+        <CardContent>
+          <Typography variant="body2" component="p">
+            Welcome to Doctor Plus home page
+          </Typography>
+        </CardContent>
+      </Card> */}
+    </div>
   );
 };

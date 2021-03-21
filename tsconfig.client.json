@@ -12,6 +12,6 @@
     "lib": ["dom", "dom.iterable", "esnext", "es5"],
     "typeRoots": ["node_modules/@types", "./client/types"]
   },
-  "include": ["./client/**/**/*"],
+  "include": ["./client/**/**/*", "index.d.ts"],
   "exclude": ["node_modules"]
 }
