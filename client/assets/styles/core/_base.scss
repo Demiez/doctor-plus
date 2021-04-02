@@ -44,3 +44,8 @@ img {
   max-width: $absolute-width;
   width: auto;
 }
+
+.container {
+  max-width: 1110px;
+  margin: $margin-center;
+}
