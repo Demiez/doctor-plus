@@ -2,7 +2,7 @@ import * as React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import backgroundImg from '../../../assets/images/home_page_bg.jpg';
-import '../../../assets/styles/core/style.scss';
+import '../../../assets/styles/views/index.scss';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -23,7 +23,12 @@ export const HomePage: React.FC = () => {
   const classes = useStyles();
   return (
     <div>
-      <div className="style">ddd</div>
+      <div className="container">ddd</div>
+      <div>Home Page </div>
+      <div>
+        <img src="" alt="" />
+      </div>
+      <div>Welcome to Doctor Plus home page</div>
       {/* <Card className={classes.card}>
         <Typography variant="h6" className={classes.title}>
           Home Page

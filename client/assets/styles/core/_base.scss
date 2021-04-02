@@ -1,0 +1,46 @@
+@import "./variables";
+@font-face {
+  font-family: "Roboto";
+  src: 
+  url("../../fonts/Roboto-Light.ttf") format("truetype"),  
+  url("../../fonts/Roboto-Thin.ttf") format("truetype"),
+  url("../../fonts/Roboto-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+}
+
+html,
+body,
+nav,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+input,
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+html {
+  font-size: 10px;
+  scroll-behavior: smooth;
+}
+
+body * {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.2rem;
+  color: $main-color;
+}
+
+img {
+  max-width: $absolute-width;
+  width: auto;
+}
