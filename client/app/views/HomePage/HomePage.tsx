@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
-import backgroundImg from '../../../assets/images/home_page_bg.jpg';
+import homePageImg from '../../../assets/images/home_page_bg.jpg';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -24,7 +24,7 @@ export const HomePage: React.FC = () => {
     <div className="container">
       <div>Home Page </div>
       <div>
-        <img src={backgroundImg} alt="Home Page Image" />
+        <img src={homePageImg} alt="Home Page Image" />
       </div>
       <div>Welcome to Doctor Plus home page</div>
       {/* <Card className={classes.card}>

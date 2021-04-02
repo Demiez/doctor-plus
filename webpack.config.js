@@ -63,7 +63,7 @@ const clientConfig = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: '/client/assets/fonts',
+              outputPath: './client/assets/fonts',
             },
           },
         ],
