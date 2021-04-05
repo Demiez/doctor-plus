@@ -1,0 +1,42 @@
+@import '../core/variables';
+
+.header {
+  min-height: 6.4rem;
+  background-color: $color-palette-violet;
+  display: flex;
+  align-items: center;
+  padding-left: 1.6rem;
+  box-shadow: 0px 4px 8px 0px $shadow-color;
+
+  > div:first-child {
+    font-weight: bold;
+  }
+
+  > div:first-child,
+  .header-homeicon,
+  a {
+    color: $default-color;
+    margin-right: $menu-item-margin;
+  }
+
+  a {
+    text-decoration: none;
+    &:hover {
+      color: $color-palette-orange;
+    }
+  }
+
+  .header-homeicon {
+    display: block;
+    border-radius: 50%;
+    padding: 5px;
+
+    img {
+      width: $home-icon-size;
+    }
+
+    &:hover {
+      background-color: $default-color;
+    }
+  }
+}

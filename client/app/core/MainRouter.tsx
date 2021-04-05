@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { HomePage, UsersPage, Signup } from '../views/';
+import { Header, HomePage, UsersPage, Signup } from '../views/';
 import { PrivateRoute } from '../modules/module.auth/';
 
 export const MainRouter: React.FC = () => {
   return (
     <div>
+      <Header />
       <Switch>
         {/* <PrivateRoute exact={true} path="/" component={HomePage} /> */}
         <Route exact={true} path="/" component={HomePage} />

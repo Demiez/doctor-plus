@@ -1,13 +1,14 @@
-@import "../core/variables";
+@import '../core/variables';
 
 .homepage {
   max-width: 60rem;
-  border-radius: 0.5rem;
   margin: $margin-center;
-}
+  box-shadow: -1px -3px 8px 2px $shadow-color;
+  border-radius: $default-border-radius;
+  margin-top: 8rem;
 
-.homepage-title {
-  
-  box-shadow: -1px -3px 8px 2px rgba(34, 60, 80, 0.2);
-  padding: 24px 20px 16px;
+  .homepage-info-one,
+  .homepage-info-two {
+    padding: 2.4rem 2rem 1.6rem;
+  }
 }
