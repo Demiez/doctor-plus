@@ -1,0 +1,15 @@
+@import '../core/variables';
+
+.text-input-basic {
+  max-width: 30rem;
+
+  & input {
+    max-width: 30rem;
+    border-bottom: 0.1rem solid #000;
+    outline: none;
+
+    &:hover {
+      border-bottom: 0.2rem solid #000;
+    }
+  }
+}

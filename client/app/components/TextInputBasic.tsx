@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { isEmpty } from 'lodash';
 import { useState, useEffect } from 'react';
+import '../../assets/styles/components/TextInputBasic.scss';
 
 type InputProps = {
   className?: string;
@@ -13,11 +15,22 @@ type InputProps = {
 
 export const TextInputBasic: React.FC<InputProps> = ({ id, className, pHolder, disabled, label, name, onChange }) => {
   const [inputValue, setInputValue] = useState<string>('');
+  const [isLabelVisible, setLabelVisible] = useState<boolean>(false);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
     e.persist();
     notifyOnchange(e);
+  };
+
+  const handleOnFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    setLabelVisible(true);
+  };
+
+  const handleOnBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (isEmpty(inputValue)) {
+      setLabelVisible(false);
+    }
   };
 
   const notifyOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +39,7 @@ export const TextInputBasic: React.FC<InputProps> = ({ id, className, pHolder, d
 
   return (
     <div className="text-input-basic">
-      {label ? <label htmlFor={name}>{label}</label> : null}
+      {isLabelVisible ? <label htmlFor={name}>{label}</label> : null}
       <input
         id={id}
         className={className}
@@ -35,6 +48,8 @@ export const TextInputBasic: React.FC<InputProps> = ({ id, className, pHolder, d
         value={inputValue}
         disabled={disabled}
         onChange={handleOnChange}
+        onFocus={handleOnFocus}
+        onBlur={handleOnBlur}
         name={name}
       />
     </div>

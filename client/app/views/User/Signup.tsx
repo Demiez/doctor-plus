@@ -83,9 +83,9 @@ export const Signup: React.FC = () => {
   return (
     <div className="signup">
       <h2>Sign Up</h2>
-      <TextInputBasic pHolder={'Name'} onChange={handleChange('name')} />
-      <TextInputBasic pHolder={'Email'} onChange={handleChange('name')} />
-      <TextInputBasic pHolder={'Password'} onChange={handleChange('name')} />
+      <TextInputBasic pHolder={'Name'} label={'Name'} onChange={handleChange('name')} />
+      <TextInputBasic pHolder={'Email'} label={'Name'} onChange={handleChange('name')} />
+      <TextInputBasic pHolder={'Password'} label={'Name'} onChange={handleChange('name')} />
       <button />
     </div>
     // <div>
