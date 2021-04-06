@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { TextInputBasic } from '../../components/TextInputBasic';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Avatar,
@@ -80,69 +81,76 @@ export const Signup: React.FC = () => {
   };
 
   return (
-    <div>
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography variant="h6" className={classes.title}>
-            Sign Up
-          </Typography>
-          <TextField
-            id="name"
-            label="Name"
-            className={classes.textField}
-            value={values.name}
-            onChange={handleChange('name')}
-            margin="normal"
-          />
-          <br />
-          <TextField
-            id="email"
-            type="email"
-            label="Email"
-            className={classes.textField}
-            value={values.email}
-            onChange={handleChange('email')}
-            margin="normal"
-          />
-          <br />
-          <TextField
-            id="password"
-            type="password"
-            label="Password"
-            className={classes.textField}
-            value={values.password}
-            onChange={handleChange('password')}
-            margin="normal"
-          />
-          <br />{' '}
-          {values.error && (
-            <Typography component="p" color="error">
-              <Icon color="error" className={classes.error}>
-                error
-              </Icon>
-              {values.error}
-            </Typography>
-          )}
-        </CardContent>
-        <CardActions>
-          <Button color="primary" variant="contained" onClick={clickSubmit} className={classes.submit}>
-            Submit
-          </Button>
-        </CardActions>
-      </Card>
-      <Dialog open={values.open} disableBackdropClick={true}>
-        <DialogTitle>New Account</DialogTitle>
-        <DialogContent>
-          <DialogContentText>New account successfully created.</DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Link to="/signin">
-            <Button color="primary" variant="contained">
-              Sign In
-            </Button>
-          </Link>
-        </DialogActions>
-      </Dialog>
+    <div className="signup">
+      <h2>Sign Up</h2>
+      <TextInputBasic pHolder={'Name'} onChange={handleChange('name')} />
+      <TextInputBasic pHolder={'Email'} onChange={handleChange('name')} />
+      <TextInputBasic pHolder={'Password'} onChange={handleChange('name')} />
+      <button />
     </div>
+    // <div>
+    //   <Card className={classes.card}>
+    //     <CardContent>
+    //       <Typography variant="h6" className={classes.title}>
+    //         Sign Up
+    //       </Typography>
+    //       <TextField
+    //         id="name"
+    //         label="Name"
+    //         className={classes.textField}
+    //         value={values.name}
+    //         onChange={handleChange('name')}
+    //         margin="normal"
+    //       />
+    //       <br />
+    //       <TextField
+    //         id="email"
+    //         type="email"
+    //         label="Email"
+    //         className={classes.textField}
+    //         value={values.email}
+    //         onChange={handleChange('email')}
+    //         margin="normal"
+    //       />
+    //       <br />
+    //       <TextField
+    //         id="password"
+    //         type="password"
+    //         label="Password"
+    //         className={classes.textField}
+    //         value={values.password}
+    //         onChange={handleChange('password')}
+    //         margin="normal"
+    //       />
+    //       <br />{' '}
+    //       {values.error && (
+    //         <Typography component="p" color="error">
+    //           <Icon color="error" className={classes.error}>
+    //             error
+    //           </Icon>
+    //           {values.error}
+    //         </Typography>
+    //       )}
+    //     </CardContent>
+    //     <CardActions>
+    //       <Button color="primary" variant="contained" onClick={clickSubmit} className={classes.submit}>
+    //         Submit
+    //       </Button>
+    //     </CardActions>
+    //   </Card>
+    //   <Dialog open={values.open} disableBackdropClick={true}>
+    //     <DialogTitle>New Account</DialogTitle>
+    //     <DialogContent>
+    //       <DialogContentText>New account successfully created.</DialogContentText>
+    //     </DialogContent>
+    //     <DialogActions>
+    //       <Link to="/signin">
+    //         <Button color="primary" variant="contained">
+    //           Sign In
+    //         </Button>
+    //       </Link>
+    //     </DialogActions>
+    //   </Dialog>
+    // </div>
   );
 };

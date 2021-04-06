@@ -11,7 +11,7 @@ export const Header: React.FC = () => {
         <img src={homeIcon} alt="home icon image" />
       </Link>
       <nav className="navigation">
-        <Link to="/" className="nav-underline">
+        <Link to="/signup" className="nav-underline">
           SIGN UP
         </Link>
         <Link to="/" className="nav-underline">
