@@ -38,11 +38,10 @@ export const TextInputBasic: React.FC<InputProps> = ({ id, className, pHolder, d
   };
 
   return (
-    <div className="text-input-basic">
+    <div className={`text-input-basic ${className}`}>
       {isLabelVisible ? <label htmlFor={name}>{label}</label> : null}
       <input
         id={id}
-        className={className}
         type="text"
         placeholder={pHolder}
         value={inputValue}

@@ -1,1 +1,26 @@
 @import '../core/variables';
+
+.signup {
+  max-width: $standard-interval;
+  min-height: $standard-interval / 2;
+  margin: $margin-center;
+  box-shadow: -1px -3px 8px 2px $shadow-color;
+  border-radius: $default-border-radius;
+  margin-top: 8rem;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & h2 {
+    color: $color-palette-violet;
+  }
+
+  .signup-input {
+    margin-top: 2rem;
+
+    & input {
+      min-width: $standard-interval / 2;
+    }
+  }
+}
