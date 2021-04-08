@@ -1,1 +1,20 @@
 @import '../core/variables';
+
+.button-basic {
+  & button {
+    padding: 5px;
+    background-color: $color-palette-violet;
+    border: none;
+    border-radius: $default-border-radius;
+    color: white;
+    padding: 12px 22px;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+
+    &:hover {
+      background-color: $color-palette-violet-dark;
+      cursor: pointer;
+    }
+  }
+}

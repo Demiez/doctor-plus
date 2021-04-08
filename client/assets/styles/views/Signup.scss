@@ -2,7 +2,7 @@
 
 .signup {
   max-width: $standard-interval;
-  min-height: $standard-interval / 2;
+  min-height: $standard-interval / 2 + 2rem;
   margin: $margin-center;
   box-shadow: -1px -3px 8px 2px $shadow-color;
   border-radius: $default-border-radius;
