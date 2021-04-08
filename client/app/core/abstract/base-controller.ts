@@ -1,3 +1,5 @@
+import axios, { AxiosResponse } from 'axios';
+
 export default class BaseController {
   /**
    * Send GET request
@@ -47,23 +49,34 @@ export default class BaseController {
    * @param uri
    * @param body
    */
-  public async sendPostRequest<T>(uri: string, body: any = {}, credentials?: boolean): Promise<T> {
-    try {
-      const response = await fetch(uri, {
-        method: 'POST',
-        // prettier-ignore
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        credentials: credentials ? 'include' : null,
-        body: JSON.stringify(body),
-      });
+  public async sendPostRequest<T>(uri: string, body: T, credentials: boolean = false): Promise<AxiosResponse<T>> {
+    const result = await axios.post(uri, body, {
+      method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      withCredentials: credentials,
+    });
 
-      return await response.json();
-    } catch (err) {
-      throw new Error();
-    }
+    return result;
+
+    // try {
+    //   const response = await fetch(uri, {
+    //     method: 'POST',
+    //     // prettier-ignore
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'application/json',
+    //     },
+    //     credentials: credentials ? 'include' : null,
+    //     body: JSON.stringify(body),
+    //   });
+
+    //   return await response.json();
+    // } catch (err) {
+    //   throw new Error();
+    // }
   }
 
   /**

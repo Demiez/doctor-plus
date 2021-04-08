@@ -1,5 +1,6 @@
-import { extend } from 'lodash';
+import { extend, isEmpty } from 'lodash';
 import { validate } from 'uuid';
+import validator from 'validator';
 import { IUserDocument, UserModel } from '../data-models/user.dm';
 import { BadRequestError, BaseErrorSubCodes, ErrorCodes, ForbiddenError, NotFoundError } from '../../../core/errors';
 import { getErrorMessage } from '../../../core/utils/db-error-handler';
@@ -53,6 +54,8 @@ class UserService {
   }
 
   public async createUser(userData: UserCreateRequestViewModel) {
+    this.vaildateUserData(userData);
+
     const user = new UserModel(userData);
 
     await user.save();
@@ -95,6 +98,30 @@ class UserService {
 
     if (!validate(userId)) {
       throw new BadRequestError(BaseErrorSubCodes.INVALID_INPUT_PARAMS_IS_BAD_VALUE, ['provide valid userId']);
+    }
+  }
+
+  private vaildateUserData(userData: UserCreateRequestViewModel) {
+    if (isEmpty(userData)) {
+      throw new ForbiddenError(BaseErrorSubCodes.INVALID_INPUT_PARAMS_IS_REQUIRED, ['provide correct user data']);
+    }
+
+    Object.keys(userData).forEach((key: string) => {
+      if (isEmpty((userData as { [index: string]: any })[key])) {
+        throw new BadRequestError(BaseErrorSubCodes.INVALID_INPUT_PARAMS_IS_BAD_VALUE, [`field '${key}' is empty`]);
+      }
+    });
+
+    if (!validator.isEmail(userData.email)) {
+      throw new BadRequestError(BaseErrorSubCodes.INVALID_INPUT_PARAMS_IS_BAD_VALUE, [
+        `field 'email' is not a valid email address`,
+      ]);
+    }
+
+    if (userData.password.length < 6) {
+      throw new BadRequestError(BaseErrorSubCodes.INVALID_INPUT_PARAMS_IS_BAD_VALUE, [
+        `field 'password' must have min 6 characters`,
+      ]);
     }
   }
 }

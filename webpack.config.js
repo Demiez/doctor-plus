@@ -22,6 +22,8 @@ const clientConfig = {
       '/api': {
         target: 'http://localhost:5000',
         pathRewrite: { '^/api': '' },
+        changeOrigin: true,
+        secure: false,
       },
     },
   },

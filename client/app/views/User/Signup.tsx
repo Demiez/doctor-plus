@@ -41,7 +41,7 @@ export const Signup: React.FC = () => {
         onChange={handleChange('password')}
         className={'signup-input'}
       />
-      <ButtonBasic title={'SUBMIT'} onClick={clickSubmit} className={'signup-submit-button'} />
+      <ButtonBasic title={'SUBMIT'} onClick={clickSubmit} className={'signup-submit-button'} type={'submit'} />
     </div>
     // <div>
     //   <Card className={classes.card}>
