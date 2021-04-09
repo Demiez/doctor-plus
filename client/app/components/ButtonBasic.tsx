@@ -1,7 +1,7 @@
 import * as React from 'react';
 import '../../assets/styles/components/ButtonBasic.scss';
 
-type InputProps = {
+type ButtonProps = {
   className?: string;
   id?: string;
   disabled?: boolean;
@@ -11,7 +11,7 @@ type InputProps = {
   onClick(): void;
 };
 
-export const ButtonBasic: React.FC<InputProps> = ({ id, className, disabled, name, title, type, onClick }) => {
+export const ButtonBasic: React.FC<ButtonProps> = ({ id, className, disabled, name, title, type, onClick }) => {
   const handleOnChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     onClick();
   };
