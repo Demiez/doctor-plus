@@ -1,8 +1,10 @@
 import * as React from 'react';
+import { AxiosError } from 'axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ButtonBasic, TextInputBasic } from '../../components';
 import { ISignupValues, UserCreateRequestViewModel, ModuleUser_UserController } from '../../modules/module.user';
+import { BaseErrorResponseViewModel } from '../../core/view-models/base-error-response.vm';
 import '../../../assets/styles';
 
 export const Signup: React.FC = () => {
@@ -25,8 +27,10 @@ export const Signup: React.FC = () => {
       .then((data) => {
         setValues({ ...values, error: '', open: true });
       })
-      .catch((error) => {
-        setValues({ ...values, error });
+      .catch((error: AxiosError<BaseErrorResponseViewModel>) => {
+        const errorText = error.response.data.errorDetails[0];
+
+        setValues({ ...values, error: errorText });
       });
   };
 
@@ -41,6 +45,7 @@ export const Signup: React.FC = () => {
         onChange={handleChange('password')}
         className={'signup-input'}
       />
+      {values.error ? <div>{values.error}</div> : null}
       <ButtonBasic title={'SUBMIT'} onClick={clickSubmit} className={'signup-submit-button'} type={'submit'} />
     </div>
     // <div>
