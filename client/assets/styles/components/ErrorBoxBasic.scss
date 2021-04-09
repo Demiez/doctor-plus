@@ -1,0 +1,21 @@
+@import '../core/variables';
+
+.error-box-basic {
+  display: flex;
+  position: relative;
+  font-size: 1.4rem;
+
+  .is-hidden {
+    visibility: hidden;
+  }
+
+  & img {
+    margin-right: 0.5rem;
+  }
+
+  & span {
+    color: $error-text-color;
+    font-size: inherit;
+    letter-spacing: 0;
+  }
+}
