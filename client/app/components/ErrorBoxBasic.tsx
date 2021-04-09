@@ -4,8 +4,8 @@ import '../../assets/styles/components/ErrorBoxBasic.scss';
 
 type ErrorBoxProps = {
   className?: string;
-  isVisible: boolean;
   errorText?: string;
+  isVisible: boolean;
 };
 
 export const ErrorBoxBasic: React.FC<ErrorBoxProps> = ({ className, errorText, isVisible }) => {
