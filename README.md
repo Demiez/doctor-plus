@@ -1,4 +1,3 @@
 ### Doctor-plus project
 
-For environment variables create .env file in root with:
-DB_HOST / DB_HOST_LOCAL
+For environment variables create .env file in root, check [.env.example](.env.example) 

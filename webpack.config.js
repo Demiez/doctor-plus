@@ -17,15 +17,15 @@ const clientConfig = {
   devServer: {
     contentBase: '/dist',
     hot: true,
-    historyApiFallback: true,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:5000',
-        pathRewrite: { '^/api': '' },
-        changeOrigin: true,
-        secure: false,
-      },
-    },
+    // historyApiFallback: true,
+    // proxy: {
+    //   '/api': {
+    //     target: 'http://localhost:5000',
+    //     pathRewrite: { '^/api': '' },
+    //     changeOrigin: true,
+    //     secure: false,
+    //   },
+    // },
   },
   devtool: 'eval-source-map',
   resolve: {
@@ -79,6 +79,7 @@ const clientConfig = {
       favicon: './client/assets/images/doctor_plus_icon.png',
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new Dotenv(),
   ],
   stats: 'errors-only',
 };
