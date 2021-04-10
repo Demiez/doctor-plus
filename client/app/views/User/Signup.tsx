@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ButtonBasic, ErrorBoxBasic, TextInputBasic } from '../../components';
@@ -24,7 +24,7 @@ export const Signup: React.FC = () => {
     const user = new UserCreateRequestViewModel(values);
 
     ModuleUser_UserController.createUser(user)
-      .then((data) => {
+      .then((response: AxiosResponse) => {
         setValues({ ...values, error: '', open: true });
       })
       .catch((error: AxiosError<BaseErrorResponseViewModel>) => {

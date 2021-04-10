@@ -9,6 +9,9 @@ export class ErrorResponse extends Error {
 
   public errorDetails: exportDetailsType;
 
+  // to adopt MongoError handling
+  public code?: number;
+
   constructor(errorCode: string, errorDetails: exportDetailsType = []) {
     super(errorCode);
     this.errorCode = errorCode;

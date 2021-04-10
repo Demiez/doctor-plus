@@ -54,7 +54,7 @@ class UserService {
   }
 
   public async createUser(userData: UserCreateRequestViewModel) {
-    this.vaildateUserData(userData);
+    await this.vaildateUserData(userData);
 
     const user = new UserModel(userData);
 
@@ -101,7 +101,7 @@ class UserService {
     }
   }
 
-  private vaildateUserData(userData: UserCreateRequestViewModel) {
+  private async vaildateUserData(userData: UserCreateRequestViewModel) {
     if (isEmpty(userData)) {
       throw new ForbiddenError(BaseErrorSubCodes.INVALID_INPUT_PARAMS_IS_REQUIRED, ['provide correct user data']);
     }
@@ -121,6 +121,14 @@ class UserService {
     if (userData.password.length < 6) {
       throw new BadRequestError(BaseErrorSubCodes.INVALID_INPUT_PARAMS_IS_BAD_VALUE, [
         `field 'password' must have min 6 characters`,
+      ]);
+    }
+
+    const user = await UserModel.findOne({ email: userData.email });
+
+    if (user) {
+      throw new ForbiddenError(BaseErrorSubCodes.INVALID_INPUT_PARAMS_IS_DUPLICATE_RECORD, [
+        'user with such email already exists',
       ]);
     }
   }

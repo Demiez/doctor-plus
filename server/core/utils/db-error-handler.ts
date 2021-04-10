@@ -1,15 +1,17 @@
 import { MongoError } from 'mongodb';
 import { Error } from 'mongoose';
+import { ErrorResponse } from '../errors';
 
-export const getErrorMessage = (err: MongoError | Error.ValidationError): string => {
+export const getErrorMessage = (err: MongoError | Error.ValidationError | ErrorResponse): string => {
   let message = '';
   if ('code' in err) {
     switch (err.code) {
       case 11000:
       case 11001:
         message = getUniqueErrorMessage(err);
+        break;
       default:
-        message = 'Something went wrong';
+        message = 'Unhandled Error';
     }
   } else {
     if ('errors' in err) {
@@ -24,7 +26,7 @@ export const getErrorMessage = (err: MongoError | Error.ValidationError): string
   return message;
 };
 
-const getUniqueErrorMessage = (err: MongoError): string => {
+const getUniqueErrorMessage = (err: MongoError | ErrorResponse): string => {
   let output: string;
 
   try {

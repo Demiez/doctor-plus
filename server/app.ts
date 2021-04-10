@@ -6,12 +6,14 @@ import * as compress from 'compression';
 import * as cors from 'cors';
 import * as helmet from 'helmet';
 import * as path from 'path';
-import { ErrorResponse, PostbackUniversalError } from './core/errors/error-response';
+import { ErrorResponse, InternalServerError, PostbackUniversalError } from './core/errors/error-response';
 import { ErrorResponseTypes } from './core/enums/error-response-types.enum';
 import { BaseErrorCodes } from './core/errors/base-error-codes';
 import { Index } from './core/route/index';
 import { UserRoute } from './modules/module.user';
 import { AuthRoute } from './modules/module.auth';
+import { getErrorMessage } from './core/utils/db-error-handler';
+import { ErrorCodes } from './core/errors';
 
 const CURRENT_WORKING_DIR = process.cwd();
 
@@ -97,6 +99,14 @@ class App {
             : error.message;
 
         return res.status(500).send(error);
+      }
+
+      if (error.code) {
+        const errorMessage = getErrorMessage(error);
+
+        const errorObject = new InternalServerError(ErrorCodes.INTERNAL_SERVER_ERROR, [`MongoError: ${errorMessage}`]);
+
+        return res.status(500).send(errorObject);
       }
 
       return res
