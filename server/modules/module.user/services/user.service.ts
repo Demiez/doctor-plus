@@ -3,7 +3,6 @@ import { validate } from 'uuid';
 import validator from 'validator';
 import { IUserDocument, UserModel } from '../data-models/user.dm';
 import { BadRequestError, BaseErrorSubCodes, ErrorCodes, ForbiddenError, NotFoundError } from '../../../core/errors';
-import { getErrorMessage } from '../../../core/utils/db-error-handler';
 import { UserCreateRequestViewModel, UserViewModel, UserRequestViewModel } from '../view-models';
 
 interface IProjection {

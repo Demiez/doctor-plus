@@ -4,5 +4,5 @@ export interface ISignupValues {
   password: string;
   email: string;
   open: boolean;
-  error: AxiosError | Error | string;
+  error: string;
 }
