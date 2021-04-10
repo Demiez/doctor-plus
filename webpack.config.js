@@ -17,7 +17,8 @@ const clientConfig = {
   devServer: {
     contentBase: '/dist',
     hot: true,
-    // historyApiFallback: true,
+    historyApiFallback: true,
+    publicPath: '/',
     // proxy: {
     //   '/api': {
     //     target: 'http://localhost:5000',
