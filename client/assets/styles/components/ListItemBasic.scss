@@ -1,0 +1,30 @@
+@import '../core/variables';
+
+.list-item-basic {
+  width: 100%;
+  font-size: 1.4rem;
+
+  & a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+
+    > img {
+      max-width: 4rem;
+      margin-right: 3rem;
+    }
+
+    > span {
+      color: $link-color;
+    }
+  }
+
+  & a:not(:first-child) {
+    margin-top: 1rem;
+  }
+
+  &:hover {
+    background-color: $color-palette-violet-light;
+  }
+}
